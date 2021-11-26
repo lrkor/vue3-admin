@@ -18,7 +18,7 @@ const routes = [
                 component: () => import('@/views/home/home.page.vue'),
                 meta: {
                     icon: 'el-icon-s-home',
-                    keepAlive: false,
+                    title: '首页',
                 },
             },
             {
@@ -26,7 +26,7 @@ const routes = [
                 name: 'test',
                 meta: {
                     icon: 'el-icon-s-home',
-                    keepAlive: false,
+                    title: '测试',
                 },
                 component: () => import('@/views/test/test.page.vue'),
             },

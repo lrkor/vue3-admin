@@ -6,6 +6,7 @@ const store = createStore({
             {
                 route: '/home',
                 name: 'home',
+                title: '首页',
             },
         ],
         currentIndex: '/home',

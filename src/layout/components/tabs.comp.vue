@@ -5,10 +5,9 @@
                 v-for="item in tabsOption"
                 :key="item.route"
                 :closable="item.route !== '/home'"
-                :label="item.name"
+                :label="item.title"
                 :name="item.route"
             >
-                {{ item.title }}
             </el-tab-pane>
         </el-tabs>
     </div>
@@ -42,7 +41,6 @@ export default defineComponent({
         };
 
         const clickTab = (tabName: {paneName: string}) => {
-            // eslint-disable-next-line no-console
             store.commit('setTab', tabName.paneName);
             router.replace({path: currentIndex.value});
         };
