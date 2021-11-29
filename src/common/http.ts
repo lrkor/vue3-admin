@@ -48,11 +48,8 @@ class Service {
         this.httpOption.responseHandle = (response: AxiosResponse, error: Error) => {
             if (!response && error) {
                 if (error.message.startsWith('timeout')) {
-                    console.log(11);
                 } else if (error.message.startsWith('Network')) {
-                    console.log(11);
                 } else {
-                    console.log(11);
                 }
                 return {};
             }

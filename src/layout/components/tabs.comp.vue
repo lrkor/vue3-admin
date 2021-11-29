@@ -21,8 +21,8 @@ export default defineComponent({
     name: 'TabsComp',
 
     setup() {
-        const tabsOption = computed(() => store.getters['getTabsOption']);
-        const currentIndex = computed(() => store.getters['getCurrentIndex']);
+        const tabsOption = computed(() => store.getters.getTabsOption);
+        const currentIndex = computed(() => store.getters.getCurrentIndex);
 
         const router = useRouter();
         const removeTab = (tabName: string) => {
@@ -31,11 +31,11 @@ export default defineComponent({
             }
             store.commit('deleteTab', tabName);
             if (currentIndex.value === tabName) {
-                if (tabsOption.value && tabsOption.value.length) {
+                if (!tabsOption.value) {
+                    router.replace({path: '/'});
+                } else {
                     store.commit('setTab', tabsOption.value[tabsOption.value.length - 1].route);
                     router.replace({path: currentIndex.value});
-                } else {
-                    router.replace({path: '/'});
                 }
             }
         };
@@ -54,5 +54,3 @@ export default defineComponent({
     },
 });
 </script>
-
-<style scoped lang="scss"></style>

@@ -29,7 +29,7 @@ export default defineComponent({
     name: 'MenuComp',
 
     setup() {
-        const currentIndex = computed(() => store.getters['getCurrentIndex']);
+        const currentIndex = computed(() => store.getters.getCurrentIndex);
         return {
             currentIndex,
         };
@@ -41,6 +41,7 @@ export default defineComponent({
 .menu-comp {
     height: 100%;
 }
+
 .el-menu-vertical {
     height: 100%;
 }

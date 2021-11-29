@@ -48,6 +48,7 @@ export default defineComponent({
     width: 100%;
     height: 100%;
 }
+
 .el-container {
     width: 100%;
     height: 100%;
@@ -57,6 +58,7 @@ export default defineComponent({
 .el-aside {
     width: 200px;
 }
+
 .el-main {
     flex: 1;
     display: flex;
@@ -66,6 +68,7 @@ export default defineComponent({
 
 .app-main {
     flex: 1;
+
     > div {
         height: 100%;
     }
