@@ -12,13 +12,11 @@ enum HttpMethod {
 class Service {
     httpOption: Record<string, unknown>;
     httpInstance: Http | null;
-    refreshing: boolean;
     callbackQueue: ((...args: any[]) => void)[];
 
     constructor(option = {}) {
         this.httpOption = option;
         this.httpInstance = null;
-        this.refreshing = false;
         this.callbackQueue = [];
     }
 
@@ -64,9 +62,6 @@ class Service {
                 case 201:
                     break;
                 case 401:
-                    if (!this.refreshing) {
-                        this.refreshing = true;
-                    }
                     break;
                 case 403:
                     break;
@@ -94,13 +89,6 @@ class Service {
     }
 
     async request<T>(method: HttpMethod, url: string, ...args: any[]): Promise<Response<T>> {
-        if (!this.refreshing) {
-            const res: Response<T> = await this.http![method](url, ...args);
-            if (res.status === 401) {
-                return this.createRequestPromise(method, url, ...args);
-            }
-            return Promise.resolve(res);
-        }
         return this.createRequestPromise(method, url, ...args);
     }
 
