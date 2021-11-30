@@ -45,4 +45,8 @@ export default defineComponent({
 .el-menu-vertical {
     height: 100%;
 }
+
+.el-menu-item.is-active {
+    background-color: #434a50;
+}
 </style>

@@ -54,3 +54,9 @@ export default defineComponent({
     },
 });
 </script>
+
+<style lang="scss" scoped>
+:deep(.el-tabs__header) {
+    margin: 0;
+}
+</style>
