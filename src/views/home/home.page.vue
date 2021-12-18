@@ -9,7 +9,12 @@ export default defineComponent({
     name: 'Home',
     components: {},
     setup() {
-        return {};
+        const test = (id: string) => {
+            return id;
+        };
+        return {
+            test,
+        };
     },
 });
 </script>
