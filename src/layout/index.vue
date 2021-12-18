@@ -10,15 +10,9 @@
                     <tabs-comp></tabs-comp>
                 </div>
                 <div class="app-main">
-                    <router-view v-if="$route.meta.keepAlive" v-slot="{Component}">
+                    <router-view v-slot="{Component}">
                         <transition name="fade" mode="out-in">
-                            <component :is="Component" :key="$route.path" />
-                        </transition>
-                    </router-view>
-
-                    <router-view v-if="!$route.meta.keepAlive" v-slot="{Component}">
-                        <transition name="fade" mode="out-in">
-                            <keep-alive>
+                            <keep-alive :include="cachedViews">
                                 <component :is="Component" :key="$route.path" />
                             </keep-alive>
                         </transition>
@@ -30,15 +24,20 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, computed} from 'vue';
 import MenuComp from './components/menu.comp.vue';
 import NavComp from './components/nav.comp.vue';
 import TabsComp from './components/tabs.comp.vue';
+import store from '@/common/store';
+
 export default defineComponent({
     name: 'Layout',
     components: {MenuComp, NavComp, TabsComp},
     setup() {
-        return {};
+        const cachedViews = computed(() => store.getters.getCachedViews);
+        return {
+            cachedViews,
+        };
     },
 });
 </script>

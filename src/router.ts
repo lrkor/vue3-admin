@@ -14,7 +14,7 @@ const routes = [
         children: [
             {
                 path: '/home',
-                name: 'home',
+                name: 'Home',
                 component: () => import('@/views/home/home.page.vue'),
                 meta: {
                     icon: 'el-icon-s-home',
@@ -23,7 +23,7 @@ const routes = [
             },
             {
                 path: '/test',
-                name: 'test',
+                name: 'Test',
                 meta: {
                     icon: 'el-icon-s-home',
                     title: '测试',
@@ -49,7 +49,7 @@ router.beforeEach((to, from, next) => {
     const flag = tabsOption.findIndex((tab: {route: string}) => tab.route === to.path) > -1;
 
     if (!flag && !to.meta.hiddenTab) {
-        store.commit('addTab', {route: to.path, title: to.meta.title, name: to.name});
+        store.commit('addTab', {route: to.path, title: to.meta.title, name: to.name, meta: to.meta});
     }
     store.commit('setTab', to.path);
     next();

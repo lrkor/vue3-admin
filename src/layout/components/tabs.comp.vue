@@ -17,19 +17,31 @@
 import {defineComponent, computed} from 'vue';
 import store from '@/common/store';
 import {useRouter} from 'vue-router';
+import TabsModel from '@/common/models/tabs.model';
+
 export default defineComponent({
     name: 'TabsComp',
 
     setup() {
-        const tabsOption = computed(() => store.getters.getTabsOption);
-        const currentIndex = computed(() => store.getters.getCurrentIndex);
-
         const router = useRouter();
+
+        const tabsOption = computed(() => store.getters.getTabsOption);
+        const currentIndex = computed({
+            get() {
+                return store.getters.getCurrentIndex;
+            },
+            set(val) {
+                store.commit('setTab', val);
+                router.replace({path: String(currentIndex.value)});
+            },
+        });
+
         const removeTab = (tabName: string) => {
             if (tabName === '/home') {
                 return;
             }
-            store.commit('deleteTab', tabName);
+            const item = tabsOption.value.find((tab: TabsModel) => tab.route === tabName);
+            store.commit('deleteTab', item);
             if (currentIndex.value === tabName) {
                 if (!tabsOption.value) {
                     router.replace({path: '/'});
@@ -42,7 +54,6 @@ export default defineComponent({
 
         const clickTab = (tabName: {paneName: string}) => {
             store.commit('setTab', tabName.paneName);
-            router.replace({path: currentIndex.value});
         };
 
         return {
