@@ -1,5 +1,5 @@
 import http from '../../common/http';
-import {Response} from 'cloudview.ui-next';
+import {Response} from '@/common/http.model';
 import type PageModel from '@/common/models/page.model';
 
 export default {
