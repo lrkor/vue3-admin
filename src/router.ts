@@ -25,10 +25,19 @@ const routes = [
                 path: '/test',
                 name: 'Test',
                 meta: {
-                    icon: 'el-icon-s-home',
+                    icon: 'el-icon-data-analysis',
                     title: '测试',
                 },
                 component: () => import('@/views/test/test.page.vue'),
+            },
+            {
+                path: '/table',
+                name: 'Table',
+                meta: {
+                    icon: 'el-icon-s-grid',
+                    title: '表格',
+                },
+                component: () => import('@/views/table/table.page.vue'),
             },
         ],
     },

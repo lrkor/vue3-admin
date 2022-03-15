@@ -9,13 +9,9 @@
             background-color="#545c64"
             text-color="#fff"
         >
-            <el-menu-item index="/home">
-                <i class="el-icon-s-home"></i>
-                <template #title>首页</template>
-            </el-menu-item>
-            <el-menu-item index="/test">
-                <i class="el-icon-data-analysis"></i>
-                <template #title>测试</template>
+            <el-menu-item v-for="(item, index) of routerArr" :key="index" :index="item.path">
+                <i :class="item.meta.icon"></i>
+                <template #title>{{ item.meta.title }}</template>
             </el-menu-item>
         </el-menu>
     </div>
@@ -24,14 +20,17 @@
 <script lang="ts">
 import {defineComponent, computed} from 'vue';
 import store from '@/common/store';
+import router from '@/router';
 
 export default defineComponent({
     name: 'MenuComp',
 
     setup() {
+        const routerArr = router.options.routes[0].children;
         const currentIndex = computed(() => store.getters.getCurrentIndex);
         return {
             currentIndex,
+            routerArr,
         };
     },
 });
