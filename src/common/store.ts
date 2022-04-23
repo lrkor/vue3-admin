@@ -1,19 +1,25 @@
 import {createStore} from 'vuex';
-import TabsModel from '@/common/models/tabs.model';
+import {TabsModel} from '@/common/models/tabs.model';
+
+interface StateModel {
+    tabsOption: TabsModel[];
+    cachedViews: string[];
+    currentIndex: string;
+}
 
 const store = createStore({
-    state: {
+    state: (): StateModel => ({
         tabsOption: [
             {
                 route: '/home',
                 name: 'Home',
                 title: '首页',
-                meta: {},
+                meta: {icon: 'el-icon-s-home', title: '首页'},
             },
         ],
         cachedViews: ['Home'],
         currentIndex: '/home',
-    },
+    }),
     mutations: {
         addTab(state: any, data: TabsModel) {
             state.tabsOption.push(data);
@@ -42,7 +48,7 @@ const store = createStore({
     },
     actions: {},
     getters: {
-        getCurrentIndex(state: any) {
+        getCurrentIndex(state: any): string {
             return state.currentIndex;
         },
         getTabsOption(state: any) {

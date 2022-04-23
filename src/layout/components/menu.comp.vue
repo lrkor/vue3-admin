@@ -24,10 +24,9 @@ import router from '@/router';
 
 export default defineComponent({
     name: 'MenuComp',
-
     setup() {
         const routerArr = router.options.routes[0].children;
-        const currentIndex = computed(() => store.getters.getCurrentIndex);
+        const currentIndex: any = computed(() => store.getters.getCurrentIndex);
         return {
             currentIndex,
             routerArr,

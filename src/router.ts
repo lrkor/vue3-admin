@@ -3,13 +3,16 @@ import LoginPage from '@/login.page.vue';
 import layout from '@/layout/index.vue';
 import store from './common/store';
 
-const routes = [
+import {RouteModel} from '@/common/models/tabs.model';
+
+const routes: RouteModel[] = [
     {
         path: '/',
         component: layout,
         redirect: '/test',
         meta: {
             icon: 'el-icon-s-home',
+            title: '首页',
         },
         children: [
             {
@@ -38,6 +41,15 @@ const routes = [
                     title: '表格',
                 },
                 component: () => import('@/views/table/table.page.vue'),
+            },
+            {
+                path: '/dialog',
+                name: 'Dialog',
+                meta: {
+                    icon: 'el-icon-s-grid',
+                    title: '弹框',
+                },
+                component: () => import('@/views/dialog/dialog.page.vue'),
             },
         ],
     },

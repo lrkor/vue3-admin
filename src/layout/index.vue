@@ -34,7 +34,7 @@ export default defineComponent({
     name: 'Layout',
     components: {MenuComp, NavComp, TabsComp},
     setup() {
-        const cachedViews = computed(() => store.getters.getCachedViews);
+        const cachedViews: any = computed(() => store.getters.getCachedViews);
         return {
             cachedViews,
         };
