@@ -1,0 +1,13 @@
+node_modules
+lib
+test
+coverage
+examples/cloudview.ui
+*.md
+*.scss
+*.woff
+*.ttf
+*.sh
+src/themes
+en-us.js
+src/assets
