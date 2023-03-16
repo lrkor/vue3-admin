@@ -23,23 +23,14 @@
     </div>
 </template>
 
-<script lang="ts">
-import {defineComponent, computed} from 'vue';
+<script lang="ts" setup>
+import {computed} from 'vue';
 import MenuComp from './components/menu.comp.vue';
 import NavComp from './components/nav.comp.vue';
 import TabsComp from './components/tabs.comp.vue';
 import store from '@/common/store';
 
-export default defineComponent({
-    name: 'Layout',
-    components: {MenuComp, NavComp, TabsComp},
-    setup() {
-        const cachedViews: any = computed(() => store.getters.getCachedViews);
-        return {
-            cachedViews,
-        };
-    },
-});
+const cachedViews: any = computed(() => store.getters.getCachedViews);
 </script>
 
 <style lang="scss" scoped>

@@ -24,5 +24,6 @@
         "components.d.ts",
         "vite.config.ts",
         "package.json"
-    ]
+    ],
+    "exclude": ["node_modules"]
 }

@@ -10,29 +10,20 @@
             text-color="#fff"
         >
             <el-menu-item v-for="(item, index) of routerArr" :key="index" :index="item.path">
-                <i :class="item.meta.icon"></i>
-                <template #title>{{ item.meta.title }}</template>
+                <i :class="item.meta?.icon"></i>
+                <template #title>{{ item.meta?.title }}</template>
             </el-menu-item>
         </el-menu>
     </div>
 </template>
 
-<script lang="ts">
-import {defineComponent, computed} from 'vue';
+<script lang="ts" setup>
+import {computed} from 'vue';
 import store from '@/common/store';
 import router from '@/router';
 
-export default defineComponent({
-    name: 'MenuComp',
-    setup() {
-        const routerArr = router.options.routes[0].children;
-        const currentIndex: any = computed(() => store.getters.getCurrentIndex);
-        return {
-            currentIndex,
-            routerArr,
-        };
-    },
-});
+const routerArr = router.options.routes[0].children;
+const currentIndex: any = computed(() => store.getters.getCurrentIndex);
 </script>
 
 <style scoped lang="scss">

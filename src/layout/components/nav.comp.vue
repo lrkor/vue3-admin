@@ -2,17 +2,7 @@
     <div class="nav-comp">nav</div>
 </template>
 
-<script lang="ts">
-import {defineComponent} from 'vue';
-
-export default defineComponent({
-    name: 'NavComp',
-
-    setup() {
-        return {};
-    },
-});
-</script>
+<script lang="ts" setup></script>
 
 <style scoped lang="scss">
 .nav-comp {

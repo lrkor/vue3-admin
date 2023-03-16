@@ -13,57 +13,43 @@
     </div>
 </template>
 
-<script lang="ts">
-import {defineComponent, computed} from 'vue';
+<script lang="ts" setup>
+import {computed} from 'vue';
 import store from '@/common/store';
 import {useRouter} from 'vue-router';
-import TabsModel from '@/common/models/tabs.model';
+import {TabsModel} from '@/common/models/tabs.model';
 
-export default defineComponent({
-    name: 'TabsComp',
-
-    setup() {
-        const router = useRouter();
-
-        const tabsOption = computed(() => store.getters.getTabsOption);
-        const currentIndex = computed({
-            get() {
-                return store.getters.getCurrentIndex;
-            },
-            set(val) {
-                store.commit('setTab', val);
-                router.replace({path: String(currentIndex.value)});
-            },
-        });
-
-        const removeTab = (tabName: string) => {
-            if (tabName === '/home') {
-                return;
-            }
-            const item = tabsOption.value.find((tab: TabsModel) => tab.route === tabName);
-            store.commit('deleteTab', item);
-            if (currentIndex.value === tabName) {
-                if (!tabsOption.value) {
-                    router.replace({path: '/'});
-                } else {
-                    store.commit('setTab', tabsOption.value[tabsOption.value.length - 1].route);
-                    router.replace({path: currentIndex.value});
-                }
-            }
-        };
-
-        const clickTab = (tabName: {paneName: string}) => {
-            store.commit('setTab', tabName.paneName);
-        };
-
-        return {
-            tabsOption,
-            currentIndex,
-            removeTab,
-            clickTab,
-        };
+const router = useRouter();
+const tabsOption = computed(() => store.getters.getTabsOption);
+const currentIndex = computed({
+    get() {
+        return store.getters.getCurrentIndex;
+    },
+    set(val) {
+        store.commit('setTab', val);
+        router.replace({path: String(currentIndex.value)});
     },
 });
+
+const removeTab = (tabName: string) => {
+    if (tabName === '/home') {
+        return;
+    }
+    const item = tabsOption.value.find((tab: TabsModel) => tab.route === tabName);
+    store.commit('deleteTab', item);
+    if (currentIndex.value === tabName) {
+        if (!tabsOption.value) {
+            router.replace({path: '/'});
+        } else {
+            store.commit('setTab', tabsOption.value[tabsOption.value.length - 1].route);
+            router.replace({path: currentIndex.value});
+        }
+    }
+};
+
+const clickTab = (tabName: {paneName: string}) => {
+    store.commit('setTab', tabName.paneName);
+};
 </script>
 
 <style lang="scss" scoped>

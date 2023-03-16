@@ -6,5 +6,11 @@ module.exports = {
         'declaration-block-trailing-semicolon': null,
         'no-descending-specificity': null,
         indentation: 4,
+        'at-rule-no-unknown': [
+            true,
+            {
+                'ignoreAtRules': ['mixin', 'include', 'extend', 'if'],
+            },
+        ],
     },
 };
