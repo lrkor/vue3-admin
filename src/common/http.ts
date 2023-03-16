@@ -47,10 +47,10 @@ class Service {
 
         this.httpOption.responseHandle = (response: AxiosResponse, error: Error) => {
             if (!response && error) {
-                if (error.message.startsWith('timeout')) {
-                } else if (error.message.startsWith('Network')) {
-                } else {
-                }
+                // if (error.message.startsWith('timeout')) {
+                // } else if (error.message.startsWith('Network')) {
+                // } else {
+                // }
                 return {};
             }
 
