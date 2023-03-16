@@ -5,17 +5,7 @@
     </div>
 </template>
 
-<script lang="ts">
-import {defineComponent, ref} from 'vue';
-
-export default defineComponent({
-    name: 'Test',
-    components: {},
-    setup() {
-        const input = ref<string>('');
-        return {
-            input,
-        };
-    },
-});
+<script lang="ts" setup>
+import {ref} from 'vue';
+const input = ref<string>('');
 </script>

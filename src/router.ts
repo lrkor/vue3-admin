@@ -42,15 +42,6 @@ const routes: RouteModel[] = [
                 },
                 component: () => import('@/views/table/table.page.vue'),
             },
-            {
-                path: '/dialog',
-                name: 'Dialog',
-                meta: {
-                    icon: 'el-icon-s-grid',
-                    title: '弹框',
-                },
-                component: () => import('@/views/dialog/dialog.page.vue'),
-            },
         ],
     },
     {
@@ -64,7 +55,7 @@ const router = createRouter({
     routes: routes,
 } as RouterOptions);
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to: any, from: any, next: any) => {
     const tabsOption = store.state.tabsOption;
     // 判断当前路由中是否已经入栈
     const flag = tabsOption.findIndex((tab: {route: string}) => tab.route === to.path) > -1;
