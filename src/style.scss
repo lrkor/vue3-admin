@@ -54,6 +54,12 @@ ul {
     justify-content: center;
 }
 
+.flex-align-start {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
 .flex-grow {
     flex: 1;
 }

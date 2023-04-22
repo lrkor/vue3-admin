@@ -42,6 +42,15 @@ const routes: RouteModel[] = [
                 },
                 component: () => import('@/views/table/table.page.vue'),
             },
+            {
+                path: '/component',
+                name: 'Component',
+                meta: {
+                    icon: 'el-icon-s-grid',
+                    title: '组件',
+                },
+                component: () => import('@/views/component/index.page.vue'),
+            },
         ],
     },
     {
