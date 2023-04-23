@@ -26,6 +26,7 @@
 
 <script lang="ts" setup>
 import {reactive} from 'vue';
+
 const tableData = reactive([
     {
         date: '2016-05-03',

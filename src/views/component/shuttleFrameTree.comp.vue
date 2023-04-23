@@ -44,18 +44,29 @@
 </template>
 
 <script lang="ts" setup>
-import {ref, watch, reactive} from 'vue';
+import {ref, watch, reactive, computed} from 'vue';
 import {ArrowLeftBold, ArrowRightBold} from '@element-plus/icons-vue';
 
+const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
-    idList: {
-        type: Array,
-        default: () => [],
+    modelValue: {
+        type: Array<string>,
+        default() {
+            return [];
+        },
+    },
+});
+
+const checkList = ref<string[]>([]);
+
+const pendingIdList = computed({
+    get: () => props.modelValue,
+    set: value => {
+        emit('update:modelValue', value);
     },
 });
 
 const customNodeClass = (data: any) => {
-    console.log(data);
     if (data.level === 1) {
         return 'card-header';
     }
@@ -75,15 +86,15 @@ watch(filterText, val => {
 });
 
 const filterNode = (value: string, data: any) => {
-    if (pendingIdList.length === 0 && !value) return true;
-    return data.name.indexOf(value) !== -1 && !pendingIdList.includes(data.id);
+    if (pendingIdList.value.length === 0 && !value) return true;
+    return data.name.indexOf(value) !== -1 && !pendingIdList.value.includes(data.id);
 };
 
 let bufferSelectIds = reactive<string[]>([]);
 let bufferSelectNodes = reactive<{name: string; id: string}[]>([]);
 
 const pendingNodeList = reactive<{name: string; id: string}[]>([]);
-const pendingIdList = reactive<string[]>([]);
+// const pendingIdList = reactive<string[]>([]);
 
 const treeCheck = (node: any, list: any) => {
     bufferSelectIds = list.checkedKeys;
@@ -131,9 +142,9 @@ const goLeft = () => {
     const arr = pendingNodeList.filter(item => !checkList.value.includes(item.id));
     const ids = arr.map(item => item.id);
     pendingNodeList.length = 0;
-    pendingIdList.length = 0;
+    pendingIdList.value.length = 0;
     pendingNodeList.push(...arr);
-    pendingIdList.push(...ids);
+    pendingIdList.value.push(...ids);
     checkList.value = [];
     treeRef.value!.filter('');
 };
@@ -146,15 +157,13 @@ const goRight = () => {
             type: 'info',
         });
     }
-    pendingIdList.push(...bufferSelectIds);
+    pendingIdList.value.push(...bufferSelectIds);
     pendingNodeList.push(...bufferSelectNodes);
     bufferSelectIds.length = 0;
     bufferSelectNodes.length = 0;
     treeRef.value!.filter('');
     treeRef.value!.setCheckedNodes([]);
 };
-
-const checkList = ref<string[]>([]);
 </script>
 
 <style scoped lang="scss">
