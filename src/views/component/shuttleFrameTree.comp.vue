@@ -3,7 +3,6 @@
         <!-- 树形结构穿梭框 -->
         <div class="left">
             <div class="title">待选区</div>
-
             <div class="tree">
                 <el-input v-model="filterText" placeholder="请输入名称" />
                 <el-tree
@@ -12,8 +11,8 @@
                     show-checkbox
                     node-key="id"
                     default-expand-all
-                    :props="defaultProps"
                     check-strictly
+                    :props="defaultProps"
                     :filter-node-method="filterNode"
                     @check="treeCheck"
                 />
@@ -51,6 +50,13 @@ const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
     modelValue: {
         type: Array<string>,
+        default() {
+            return [];
+        },
+    },
+
+    treeData: {
+        type: Array<any>,
         default() {
             return [];
         },
@@ -94,42 +100,15 @@ let bufferSelectIds = reactive<string[]>([]);
 let bufferSelectNodes = reactive<{name: string; id: string}[]>([]);
 
 const pendingNodeList = reactive<{name: string; id: string}[]>([]);
-// const pendingIdList = reactive<string[]>([]);
 
 const treeCheck = (node: any, list: any) => {
     bufferSelectIds = list.checkedKeys;
     bufferSelectNodes = list.checkedNodes;
 };
 
-const treeData = [
-    {
-        id: '323234',
-        name: 'Level one 1',
-        level: 1,
-        children: [
-            {
-                id: '3232456434',
-                name: 'Level two 1-1',
-            },
-        ],
-    },
-
-    {
-        id: '323234',
-        name: 'Level one 3',
-        level: 1,
-        children: [
-            {
-                id: '123',
-                name: 'Level two 3-1',
-            },
-            {
-                id: '3232324223434',
-                name: 'Level two 3-2',
-            },
-        ],
-    },
-];
+const getNodes = () => {
+    return pendingNodeList;
+};
 
 const goLeft = () => {
     if (checkList.value.length === 0) {
@@ -164,29 +143,37 @@ const goRight = () => {
     treeRef.value!.filter('');
     treeRef.value!.setCheckedNodes([]);
 };
+
+defineExpose({
+    getNodes,
+});
 </script>
 
 <style scoped lang="scss">
+.card-header {
+    background-color: #eee;
+}
+
 .shuttle-frame-tree {
     display: flex;
     height: 100%;
 
-    :deep(.el-tree-node > .el-tree-node__content .el-checkbox) {
+    :deep(.card-header > .el-tree-node__content .el-checkbox) {
         display: none;
-    }
-
-    :deep(.el-tree-node__children .el-tree-node > .el-tree-node__content .el-checkbox) {
-        display: inherit;
     }
 
     .left {
         background-color: #fff;
         width: 300px;
         border-radius: 8px;
+        display: flex;
+        flex-direction: column;
 
         .tree {
             padding: 16px;
-
+            overflow-y: auto;
+            height: 0;
+            flex: 1 1 auto;
             :deep(.el-input) {
                 margin-bottom: 16px;
             }
@@ -227,9 +214,14 @@ const goRight = () => {
         background-color: #fff;
         width: 300px;
         border-radius: 8px;
+        display: flex;
+        flex-direction: column;
 
         .pending {
             padding: 16px;
+            overflow-y: auto;
+            flex: 1 1 auto;
+            height: 0;
         }
     }
 }
