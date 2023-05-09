@@ -23,7 +23,7 @@ const store = createStore({
     mutations: {
         addTab(state: any, data: TabsModel) {
             state.tabsOption.push(data);
-            if (!data.meta.noCache) {
+            if (data.meta?.noCache) {
                 state.cachedViews.push(data.name);
             }
         },

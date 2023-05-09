@@ -12,7 +12,8 @@ export interface Response<T> extends AxiosResponse<T> {
 }
 export declare class Http {
     http: AxiosInstance;
-    constructor(options: HttpConfig);
+
+    constructor(options: Record<string, unknown>);
     parseUrl(url: string, param: Param): string;
     static parseResponse<T>(response: AxiosResponse<T>, error?: any): Response<T>;
     get<T>(url: string, param?: Param, config?: AxiosRequestConfig): Promise<Response<T>>;

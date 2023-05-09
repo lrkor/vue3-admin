@@ -4,12 +4,17 @@
             <el-button @click="getNodes">get</el-button>
             <shuttle-frame-tree-comp ref="customTree" v-model="idList" :tree-data="treeData" />
         </div>
+
+        <div>
+            <b-input v-model="value" />
+        </div>
     </div>
 </template>
 
 <script lang="ts" setup>
 import {ref} from 'vue';
 import shuttleFrameTreeComp from './shuttleFrameTree.comp.vue';
+import bInput from './bInput.vue';
 
 const idList = ref<string[]>([]);
 
@@ -59,6 +64,8 @@ const treeData = [
 ];
 
 const customTree = ref<any>();
+
+const value = ref('');
 </script>
 
 <style scoped lang="scss">
