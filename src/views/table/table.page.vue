@@ -1,9 +1,9 @@
 <template>
     <div class="table">
         <el-table :data="tableData" border style="width: 100%" @row-click="rowClick">
-            <el-table-column prop="date" label="Date" width="180" />
-            <el-table-column prop="name" label="Name" width="180" />
-            <el-table-column prop="num1" label="加数1">
+            <el-table-column label="Date" prop="date" width="180" />
+            <el-table-column label="Name" prop="name" width="180" />
+            <el-table-column label="加数1" prop="num1">
                 <template #default="{row}">
                     <div v-if="row.edit">
                         <el-input v-model="row.num1" type="number" @change="change(row.num1, row, 'num2')"></el-input>
@@ -11,7 +11,7 @@
                     <span v-else>{{ row.num1 }}</span>
                 </template>
             </el-table-column>
-            <el-table-column prop="num2" label="加数2">
+            <el-table-column label="加数2" prop="num2">
                 <template #default="{row}">
                     <div v-if="row.edit">
                         <el-input v-model="row.num2" type="number" @change="change(row.num1, row, 'num1')"></el-input>
@@ -19,7 +19,7 @@
                     <span v-else>{{ row.num2 }}</span>
                 </template>
             </el-table-column>
-            <el-table-column prop="total" label="总数"> </el-table-column>
+            <el-table-column label="总数" prop="total"></el-table-column>
         </el-table>
     </div>
 </template>
@@ -58,6 +58,7 @@ const rowClick = (row: any) => {
     tableData.forEach(item => {
         item.edit = false;
     });
+
     row.edit = true;
 };
 
