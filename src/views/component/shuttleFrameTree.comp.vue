@@ -8,23 +8,27 @@
                 <el-tree
                     ref="treeRef"
                     :data="treeData"
-                    show-checkbox
-                    node-key="id"
-                    default-expand-all
-                    check-strictly
-                    :props="defaultProps"
                     :filter-node-method="filterNode"
+                    :props="defaultProps"
+                    check-strictly
+                    default-expand-all
+                    node-key="id"
+                    show-checkbox
                     @check="treeCheck"
                 />
             </div>
         </div>
         <div class="middle">
             <div @click="goLeft">
-                <el-icon><ArrowLeftBold /></el-icon>
+                <el-icon>
+                    <ArrowLeftBold />
+                </el-icon>
             </div>
 
             <div @click="goRight">
-                <el-icon><ArrowRightBold /></el-icon>
+                <el-icon>
+                    <ArrowRightBold />
+                </el-icon>
             </div>
         </div>
         <div class="right">
@@ -43,8 +47,9 @@
 </template>
 
 <script lang="ts" setup>
-import {ref, watch, reactive, computed} from 'vue';
+import {computed, reactive, ref, watch} from 'vue';
 import {ArrowLeftBold, ArrowRightBold} from '@element-plus/icons-vue';
+import {ElNotification} from 'element-plus';
 
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
@@ -149,7 +154,7 @@ defineExpose({
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .card-header {
     background-color: #eee;
 }
@@ -174,6 +179,7 @@ defineExpose({
             overflow-y: auto;
             height: 0;
             flex: 1 1 auto;
+
             :deep(.el-input) {
                 margin-bottom: 16px;
             }

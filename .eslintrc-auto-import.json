@@ -1,5 +1,3 @@
 {
-  "globals": {
-    "ElNotification": true
-  }
+  "globals": {}
 }
