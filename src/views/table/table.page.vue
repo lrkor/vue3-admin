@@ -1,5 +1,8 @@
 <template>
     <div class="table">
+        <el-icon :size="14" color="transparent">
+            <icon-add></icon-add>
+        </el-icon>
         <el-table :data="tableData" border style="width: 100%" @row-click="rowClick">
             <el-table-column label="Date" prop="date" width="180" />
             <el-table-column label="Name" prop="name" width="180" />
@@ -26,6 +29,7 @@
 
 <script lang="ts" setup>
 import {reactive} from 'vue';
+import {IconAdd} from '@/icons/index';
 
 const tableData = reactive([
     {
